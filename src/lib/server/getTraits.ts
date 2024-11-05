@@ -1,5 +1,6 @@
 import { TraitValue, type Trait } from '../trait';
 import { JSDOM } from 'jsdom';
+import DOMPurify from 'dompurify';
 
 export async function getTraits(customFetch: typeof fetch = fetch): Promise<Trait[]> {
 	const response = await customFetch('https://cosmosdex.com/cosmosdex/traits/');
@@ -48,7 +49,7 @@ export async function getTraits(customFetch: typeof fetch = fetch): Promise<Trai
 
 		const effectsElement = element.querySelector('p');
 		const effectsText = effectsElement?.textContent || '';
-		const effectsHTML = effectsElement?.innerHTML || effectsText;
+		const effectsHTML = DOMPurify.sanitize(effectsElement?.innerHTML || effectsText);
 
 		if (!effectsElement) {
 			continue;

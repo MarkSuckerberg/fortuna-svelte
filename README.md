@@ -1,38 +1,11 @@
-# create-svelte
+# Tabletuna Character Creation Tools
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+This webapp aims to make the process of creating a character for the fan-made [Cosmosdex-inspired](https://cosmosdex.com/) tabletop, [Tabletuna](https://hackmd.io/@Honk/rkjfYWCrK), much more fun and easy to do.
 
-## Creating a project
+There are plans for expanding into different systems, but currently the project is entirely focused on Tabletuna.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Licensing
 
-```bash
-# create a new project in the current directory
-npx sv create
+All SVG assets, unless otherwise noted are by Gimeurcookie. Their assets are from the [FORTUNA RESOURCE AND STARTER PACK], whose conditions can be found [here](static/fortuna-resource-and-starter-pack-conditions.txt).
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+All code is under the MIT License, which can be found [here](LICENSE).
