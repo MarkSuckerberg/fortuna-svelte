@@ -1,0 +1,25 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "firefox",
+			"request": "launch",
+			"name": "Launch Waterfox",
+			"url": "http://localhost:5173",
+			"webRoot": "${workspaceFolder}",
+			"firefoxExecutable": "/usr/bin/waterfox"
+		},
+		{
+			"command": "npm run dev",
+			"name": "Run development server",
+			"request": "launch",
+			"type": "node-terminal"
+		}
+	],
+	"compounds": [
+		{
+			"name": "Launch Waterfox and Run development server",
+			"configurations": ["Launch Waterfox", "Run development server"]
+		}
+	]
+}
