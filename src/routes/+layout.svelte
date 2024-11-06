@@ -22,11 +22,12 @@
 		{@render children()}
 	</main>
 
-	<footer class="flex w-full flex-row bg-slate-500 *:p-2">
-		<a href="/fortuna-resource-and-starter-pack-conditions.txt"
+	<footer class="grid grid-cols-3 bg-slate-500 *:p-2">
+		<a class="text-left" href="/fortuna-resource-and-starter-pack-conditions.txt"
 			>Traits and SVG assets by Gimeurcookie!</a
 		>
-		<a class="ml-auto" href="https://github.com/MarkSuckerberg/fortuna-svelte"
+		<a class="text-center" href="https://stellers.gay">Built with love by Mark Suckerberg</a>
+		<a class="text-right" href="https://github.com/MarkSuckerberg/fortuna-svelte"
 			>Site Source Code</a
 		>
 	</footer>
@@ -37,6 +38,7 @@
 		width: max(75vw, min(1000px, 100%));
 		margin: 1em auto;
 		background-color: white;
+		border: 1px solid black;
 	}
 
 	a:hover {

@@ -65,6 +65,8 @@
 	}
 </script>
 
+<h1>Aftik Creator</h1>
+
 <div class="character-display flex w-full flex-col p-3 *:flex-grow sm:flex-row">
 	<div class="flex flex-col text-center sm:text-left">
 		<label>
@@ -87,7 +89,7 @@
 			Scarf Accent Color:
 			<input type="color" bind:value={colorProps.scarf2} />
 		</label>
-		<button class="sm:text-left" on:click={downloadSvg}>Download SVG</button>
+		<button class="mt-auto sm:text-left" on:click={downloadSvg}>Download SVG</button>
 		<button class="sm:text-left" on:click={downloadPng}>Download PNG</button>
 	</div>
 
@@ -104,5 +106,9 @@
 		border-bottom: 8px double #e6e6e6;
 		min-height: 400px;
 		font-size: 22px;
+	}
+	button {
+		font-family: 'Gill Sans', 'Times New Roman', serif;
+		font-weight: normal;
 	}
 </style>

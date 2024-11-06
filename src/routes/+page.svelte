@@ -18,9 +18,9 @@
 	<h1>Hello, and welcome to the new Tabletuna utilities site!</h1>
 
 	<p>
-		I felt like the old version of this was awfully slow and outdated, and I wanted to practice
-		a new web framework. There's still not a ton more to this site, though I'm hoping to add
-		more eventually as it's much easier to do so.
+		I felt like the <a href="https://old-fortuna.suckerberg.gay">old version</a> of this was awfully
+		slow and outdated, and I wanted to practice a new web framework. There's still not a ton more
+		to this site, though I'm hoping to add more eventually as it's much easier to do so.
 	</p>
 
 	<p>
