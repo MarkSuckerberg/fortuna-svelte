@@ -6,7 +6,7 @@
 </script>
 
 <div class="main-box">
-	<nav class="mb-2 flex w-full flex-row bg-slate-500 *:p-2">
+	<nav class="mb-2 flex w-full flex-row bg-slate-500 text-black *:p-2 *:no-underline">
 		<a href="/">Home</a>
 		<a href="/character">Character Creator</a>
 		<a href="/aftik">Aftik Creator</a>
@@ -22,9 +22,12 @@
 		{@render children()}
 	</main>
 
-	<footer class="bg-slate-500">
-		<a class="p-2" href="/fortuna-resource-and-starter-pack-conditions.txt"
+	<footer class="flex w-full flex-row bg-slate-500 *:p-2">
+		<a href="/fortuna-resource-and-starter-pack-conditions.txt"
 			>Traits and SVG assets by Gimeurcookie!</a
+		>
+		<a class="ml-auto" href="https://github.com/MarkSuckerberg/fortuna-svelte"
+			>Site Source Code</a
 		>
 	</footer>
 </div>
@@ -37,10 +40,6 @@
 	}
 
 	a:hover {
-		background-color: #e6e6e6;
-	}
-
-	a:active {
 		background-color: #e6e6e6;
 	}
 </style>

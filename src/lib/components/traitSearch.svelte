@@ -13,7 +13,12 @@
 </script>
 
 <div class="flex h-full flex-col overflow-hidden">
-	<input type="text" class="bg-gray-500" placeholder="Search" bind:value={query} />
+	<input
+		type="text"
+		class="border-l-0 border-t-0 border-slate-500 hover:border-l-0 hover:border-t-0"
+		placeholder="Search"
+		bind:value={query}
+	/>
 	<ul class="h-full overflow-scroll">
 		{#each traits as trait (trait.name)}
 			{#if query === '' || trait.name

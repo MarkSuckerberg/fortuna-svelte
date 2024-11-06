@@ -36,7 +36,7 @@
 >
 	<div class="flex h-full flex-col overflow-hidden">
 		{#if traitDict}
-			<nav class="flex flex-row bg-slate-600 *:p-3">
+			<nav class="flex flex-row bg-slate-500 *:p-3">
 				{#each Object.keys(traitDict) as tab (tab)}
 					<button
 						class={tab === currentTab ? 'bg-cyan-400' : ''}
@@ -57,7 +57,7 @@
 
 			<div class="col-span-2 flex flex-col overflow-hidden">
 				<div class="overflow-scroll">
-					<a href={selected.link}><h2>{selected.name}</h2></a>
+					<h2>{selected.name}</h2>
 					<hr />
 					<p>
 						{@html selected.effectsHTML}
@@ -65,11 +65,13 @@
 					<p>
 						<b>Type:</b>
 						{TraitValue[selected.value]}
-						<br />
 						{#if selected.otherVersions.length > 0}
+							<br />
 							<b>Other versions:</b>
 							{selected.otherVersions.join(', ')}
 						{/if}
+						<br />
+						<b><a href={selected.link}>Link</a></b>
 					</p>
 					{#if selected.name.includes('X')}
 						<hr />
@@ -85,7 +87,7 @@
 					{/if}
 				</div>
 
-				<div class="mt-auto bg-slate-600 *:p-3">
+				<div class="mt-auto bg-slate-500 *:p-3">
 					<button
 						onclick={() => {
 							callback(selected);
@@ -105,7 +107,6 @@
 	dialog {
 		width: max(66vw, min(1000px, 100vw));
 		height: max(66svh, 250px);
-		background-color: slategray;
 	}
 
 	dialog::backdrop {
