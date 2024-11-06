@@ -1,113 +1,137 @@
 import { TraitValue, type Trait } from '../trait';
-import { WritableStream } from 'htmlparser2/lib/WritableStream';
+import { HTMLRewriter } from 'htmlrewriter';
 
 export default async function getTraits(customFetch: typeof fetch = fetch): Promise<Trait[]> {
 	const response = await customFetch('https://cosmosdex.com/cosmosdex/traits/');
 
-	const foundTraits: Trait[] = [];
-	let currentTrait: { trait: Partial<Trait>; hasOtherVer?: boolean; readingEffects?: boolean } = {
-		trait: {}
+	let currentFramework: {
+		startName: boolean;
+		currentName: string;
+		startEffects: boolean;
+		currentEffects: string;
+		startOtherVersions: boolean;
+		currentOtherVersion: string;
+		trait: Partial<Trait>;
+	} = {
+		startName: false,
+		currentName: '',
+		startEffects: false,
+		currentEffects: '',
+		startOtherVersions: false,
+		currentOtherVersion: '',
+		trait: { otherVersions: [] }
 	};
 
-	const stream = new WritableStream({
-		onattribute(name, value) {
-			if (name !== 'class') {
+	const foundTraits: Trait[] = [];
+	const rewriter = new HTMLRewriter().on('div[class=dexsectiontextmiddle] *', {
+		element(element) {
+			if (element.tagName === 'h3') {
+				if (currentFramework.trait.name) {
+					foundTraits.push(currentFramework.trait as Trait);
+				}
+				currentFramework = {
+					startName: false,
+					currentName: '',
+					startEffects: false,
+					currentEffects: '',
+					startOtherVersions: false,
+					currentOtherVersion: '',
+					trait: { otherVersions: [] }
+				};
 				return;
 			}
-			switch (value) {
-				case 'dexsectiontextmiddle':
-					if (currentTrait.trait.name) {
-						foundTraits.push(currentTrait.trait as Trait);
-					}
-					currentTrait = { trait: {} };
-					break;
+
+			if (element.tagName === 'a' && !currentFramework.trait.link) {
+				currentFramework.trait.link = `https://cosmosdex.com/cosmosdex/traits/${element.getAttribute('href')}`;
+				currentFramework.startName = true;
+				return;
+			}
+
+			if (currentFramework.startEffects || element.tagName === 'p') {
+				if (!currentFramework.trait.effectsHTML) {
+					currentFramework.trait.effects = '';
+					currentFramework.trait.effectsHTML = '';
+				}
+
+				currentFramework.trait.effectsHTML += `<${element.tagName}>`;
+				currentFramework.trait.effects += '';
+
+				if (!currentFramework.startEffects) {
+					element.onEndTag((endtag) => {
+						currentFramework.startEffects = false;
+						currentFramework.trait.effectsHTML += `</${endtag.name}>`;
+					});
+					currentFramework.startEffects = true;
+				} else if (element.tagName !== 'br') {
+					element.onEndTag((endtag) => {
+						currentFramework.trait.effectsHTML += `</${endtag.name}>`;
+					});
+				}
+
+				return;
+			}
+
+			const classAttr = element.getAttribute('class');
+
+			if (!classAttr) {
+				return;
+			}
+
+			if (classAttr.startsWith('traitotherver')) {
+				currentFramework.startOtherVersions = true;
+				return;
+			}
+
+			switch (classAttr) {
 				case 'bluetrait':
-					currentTrait.trait.value = TraitValue.Neutral;
+					currentFramework.trait.value = TraitValue.Neutral;
 					break;
 				case 'greentrait':
-					currentTrait.trait.value = TraitValue.Positive;
+					currentFramework.trait.value = TraitValue.Positive;
 					break;
 				case 'redtrait':
-					currentTrait.trait.value = TraitValue.Negative;
+					currentFramework.trait.value = TraitValue.Negative;
 					break;
 				case 'purpletrait':
-					currentTrait.trait.value = TraitValue.Mystery;
+					currentFramework.trait.value = TraitValue.Mystery;
 					break;
 				case 'yellowtrait':
-					currentTrait.trait.value = TraitValue.Ability;
+					currentFramework.trait.value = TraitValue.Ability;
 					break;
 			}
+		},
 
-			if (value.startsWith('traitotherver')) {
-				currentTrait.hasOtherVer = true;
-			}
-		},
-		onopentag(name, attributes) {
-			if (currentTrait.readingEffects) {
-				currentTrait.trait.effectsHTML += `<${name}>`;
-			}
-			if (currentTrait.trait.value && name === 'a') {
-				currentTrait.trait.link = `https://cosmosdex.com/cosmosdex/traits/${attributes.href}`;
-			}
-			if (name === 'p') {
-				currentTrait.readingEffects = true;
-				currentTrait.trait.effectsHTML = '';
-				currentTrait.trait.effects = '';
-			}
-		},
-		onclosetag(name) {
-			if (name === 'p' && currentTrait.readingEffects && currentTrait.trait.effectsHTML) {
-				currentTrait.readingEffects = false;
-				return;
-			}
-			if (currentTrait.readingEffects) {
-				if (name === 'br') {
-					return;
+		text(text) {
+			if (currentFramework.startName) {
+				currentFramework.currentName += text.text;
+
+				if (text.lastInTextNode) {
+					currentFramework.trait.name = currentFramework.currentName.slice(1, -1);
+					currentFramework.startName = false;
 				}
-				currentTrait.trait.effectsHTML += `</${name}>`;
-			}
-		},
-		ontext(text) {
-			if (currentTrait.readingEffects) {
-				currentTrait.trait.effectsHTML += text;
-				currentTrait.trait.effects += text;
 			}
 
-			if (currentTrait.hasOtherVer && !currentTrait.trait.otherVersions) {
-				currentTrait.trait.otherVersions = text
-					.split('] [')
-					.map((version) => version.replace('[', '').replace(']', ''));
+			if (currentFramework.startEffects) {
+				currentFramework.trait.effectsHTML += text.text;
+				currentFramework.trait.effects += text.text;
 				return;
 			}
-			if (currentTrait.trait.link && !currentTrait.trait.name) {
-				currentTrait.trait.name = text.slice(1, -1);
+
+			if (currentFramework.startOtherVersions) {
+				currentFramework.currentOtherVersion += text.text;
+
+				if (text.lastInTextNode) {
+					currentFramework.trait.otherVersions = currentFramework.currentOtherVersion
+						.split('] [')
+						.map((version) => version.replace('[', '').replace(']', ''));
+					currentFramework.startOtherVersions = false;
+				}
 				return;
 			}
 		}
 	});
 
-	if (!response.body) {
-		throw new Error('Response body is empty');
-	}
-
-	const reader = response.body.getReader();
-
-	while (true) {
-		const { done, value } = await reader.read();
-		if (done) {
-			break;
-		}
-		stream.write(value);
-	}
-
-	stream.end();
-
-	await new Promise((resolve, reject) => {
-		stream.on('finish', () => {
-			resolve(foundTraits);
-		});
-		stream.on('error', reject);
-	});
+	await rewriter.transform(response).arrayBuffer();
 
 	foundTraits.sort(
 		(a, b) =>
