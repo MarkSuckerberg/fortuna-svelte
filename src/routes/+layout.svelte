@@ -2,8 +2,34 @@
 	import type { Snippet } from 'svelte';
 	import '../app.css';
 	import { navigating } from '$app/stores';
+	import aftik from '$lib/assets/aftik.png';
 	let { children }: { children: Snippet } = $props();
 </script>
+
+<svelte:head>
+	<title>Tabletuna Tools</title>
+	<meta name="description" content="Aftik and Character Creator for the Cosmosdex" />
+	<meta name="author" content="Mark Suckerberg" />
+	<meta name="keywords" content="Fortuna, Cosmosdex, Aftik, TTRPG" />
+	<meta name="referrer" content="strict-origin-when-cross-origin" />
+	<link rel="canonical" href="https://fortuna.stellers.gay" />
+
+	<!-- Embed Tags -->
+	<meta property="og:url" content="https://fortuna.stellers.gay" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Tabletuna Tools" />
+	<meta property="og:description" content="Aftik and Character Creator for the Cosmosdex" />
+	<meta property="og:image" content={aftik} />
+	<meta property="og:image:width" content="509" />
+	<meta property="og:image:height" content="450" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta property="twitter:domain" content="fortuna.stellers.gay" />
+	<meta property="twitter:url" content="https://fortuna.stellers.gay" />
+	<meta name="twitter:title" content="Tabletuna Tools" />
+	<meta name="twitter:description" content="Aftik and Character Creator for the Cosmosdex" />
+	<meta name="twitter:image" content={aftik} />
+</svelte:head>
 
 <div class="main-box">
 	<nav class="mb-2 flex w-full flex-row bg-slate-500 text-black *:p-2 *:no-underline">

@@ -6,7 +6,7 @@ There are plans for expanding into different systems, but currently the project 
 
 ## Licensing
 
-All SVG assets, unless otherwise noted are by Gimeurcookie. Their assets are from the [FORTUNA RESOURCE AND STARTER PACK], whose conditions can be found [here](static/fortuna-resource-and-starter-pack-conditions.txt).
+All SVG and other image assets, unless otherwise noted, are by Gimeurcookie. Their assets are from the [FORTUNA RESOURCE AND STARTER PACK], whose conditions can be found [here](static/fortuna-resource-and-starter-pack-conditions.txt).
 
 favico.ico and olivebutton.png is of my Aftik, drawn by [Honkbird](https://honkbird.tumblr.com).
 
