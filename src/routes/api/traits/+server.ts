@@ -1,4 +1,4 @@
-import parser from '$lib/server/traitParser.js';
+import parser from '#lib/server/traitParser.js';
 import { json } from '@sveltejs/kit';
 
 export async function GET({ fetch, setHeaders }) {

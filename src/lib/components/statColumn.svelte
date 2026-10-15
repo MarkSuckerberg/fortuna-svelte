@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Character } from '$lib/character.svelte';
+	import type { Character } from '#lib/character.svelte.ts';
 
 	let { character = $bindable() }: { character: Character } = $props();
 </script>

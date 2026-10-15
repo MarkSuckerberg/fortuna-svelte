@@ -1,5 +1,5 @@
 import { TraitValue, type Trait } from './trait';
-import aftik from '$lib/assets/aftik.svg';
+import aftik from '#lib/assets/aftik.svg';
 
 export enum Stats {
 	Strength,

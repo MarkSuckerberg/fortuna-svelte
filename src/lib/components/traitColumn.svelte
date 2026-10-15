@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { traitDictionary, TraitValue, type Trait } from '$lib/trait';
+	import { traitDictionary, TraitValue, type Trait } from '#lib/trait.ts';
 	import TraitDialog from './traitDialog.svelte';
-	import type { Character } from '$lib/character.svelte';
+	import type { Character } from '#lib/character.svelte.ts';
 	import Tooltip from './tooltip.svelte';
 
 	function valueToClass(value: TraitValue) {

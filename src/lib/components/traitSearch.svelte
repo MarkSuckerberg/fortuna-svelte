@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Trait } from '$lib/trait';
+	import { type Trait } from '#lib/trait.ts';
 
 	let {
 		traits = $bindable([]),
@@ -15,7 +15,7 @@
 <div class="flex h-full flex-col overflow-hidden">
 	<input
 		type="text"
-		class="border-l-0 border-t-0 border-slate-500 hover:border-l-0 hover:border-t-0"
+		class="border-t-0 border-l-0 border-slate-500 hover:border-t-0 hover:border-l-0"
 		placeholder="Search"
 		bind:value={query}
 	/>

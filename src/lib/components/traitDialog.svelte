@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TraitValue, type Trait } from '$lib/trait';
+	import { TraitValue, type Trait } from '#lib/trait.ts';
 	import TraitSearch from './traitSearch.svelte';
 
 	let {
@@ -25,8 +25,6 @@
 	let currentTraits = $derived(currentTab != 'All' && traitDict ? traitDict[currentTab] : traits);
 </script>
 
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<!-- svelte-ignore a11y_click_events_have_key_events -->
 <dialog
 	bind:this={dialog}
 	onclose={() => (open = false)}
@@ -71,18 +69,13 @@
 							{selected.otherVersions.join(', ')}
 						{/if}
 						<br />
-						<b><a href={selected.link}>Link</a></b>
+						<b><a href={selected.link} rel="external">Link</a></b>
 					</p>
 					{#if selected.name.includes('X')}
 						<hr />
 						<p>
 							<b class="text-red-800">Trait Target:</b>
-							<input
-								class="text-left"
-								type="text"
-								bind:value={selected.target}
-								placeholder="X"
-							/>
+							<input class="text-left" type="text" bind:value={selected.target} placeholder="X" />
 						</p>
 					{/if}
 				</div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Aftik from '$lib/components/aftik.svelte';
+	import Aftik from '#lib/components/aftik.svelte';
 
 	let colorProps = {
 		mainColor: '#999999',
@@ -67,7 +67,7 @@
 
 <h1>Aftik Creator</h1>
 
-<div class="character-display flex w-full flex-col p-3 *:flex-grow sm:flex-row">
+<div class="character-display flex w-full flex-col p-3 *:grow sm:flex-row">
 	<div class="flex flex-col text-center sm:text-left">
 		<label>
 			Main Color:
@@ -89,8 +89,8 @@
 			Scarf Accent Color:
 			<input type="color" bind:value={colorProps.scarf2} />
 		</label>
-		<button class="mt-auto sm:text-left" on:click={downloadSvg}>Download SVG</button>
-		<button class="sm:text-left" on:click={downloadPng}>Download PNG</button>
+		<button class="mt-auto sm:text-left" onclick={downloadSvg}>Download SVG</button>
+		<button class="sm:text-left" onclick={downloadPng}>Download PNG</button>
 	</div>
 
 	<div id="download">

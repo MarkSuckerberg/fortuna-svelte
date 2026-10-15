@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { Character } from '$lib/character.svelte';
-	import CharacterDisplay from '$lib/components/characterDisplay.svelte';
-	import InfoColumn from '$lib/components/infoColumn.svelte';
-	import StatColumn from '$lib/components/statColumn.svelte';
-	import TraitColumn from '$lib/components/traitColumn.svelte';
+	import { Character } from '#lib/character.svelte.ts';
+	import CharacterDisplay from '#lib/components/characterDisplay.svelte';
+	import InfoColumn from '#lib/components/infoColumn.svelte';
+	import StatColumn from '#lib/components/statColumn.svelte';
+	import TraitColumn from '#lib/components/traitColumn.svelte';
+	import { browser } from '$app/env';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
