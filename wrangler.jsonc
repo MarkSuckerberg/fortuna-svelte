@@ -8,6 +8,16 @@
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
+	"routes": [
+		{
+			"pattern": "fortuna.stellers.gay",
+			"custom_domain": true
+		},
+		{
+			"pattern": "fortuna.suckerberg.gay",
+			"custom_domain": true
+		}
+	],
 	"workers_dev": true,
 	"preview_urls": true
 }
